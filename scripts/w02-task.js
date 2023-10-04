@@ -14,7 +14,7 @@ let profilePicture = "images/nicholas.png";
 const nameElement = document.getElementById("name");
 const foodElement = document.getElementById("food");
 const yearElement = document.querySelector("#year");
-const imageElement = document.createElement("img");
+const imageElement = document.querySelector("img");
 
 
 
