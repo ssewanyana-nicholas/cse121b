@@ -26,7 +26,7 @@ let myProfile = {
 // Adding details about places lived to the 'placesLived' property
 myProfile.placesLived.push(
     { place: "Manchester", length: "1 year" },
-    { place: "Kampala", length: "2 years" },
+    { place: "Kampala", length: "24 years" },
     { place: "Wembley", length: "1 year" },
     { place: "Montana", length: "2 years" },
     { place: "Nairobi", length: "2 years" }
