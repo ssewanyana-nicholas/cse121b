@@ -77,11 +77,14 @@ h2 {
 
 main {
     margin-top: 125px;
-    display: grid;
     grid-template-columns: 1fr;
     grid-gap: 20px;
     align-items: center;
     justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center everything in the main container */
+    margin-top: 125px;
 }
 
 picture {
@@ -115,6 +118,17 @@ footer {
     width: 100%;
     position: fixed;
     bottom: 0;
+}
+
+#sortBy {
+    margin-top: 10px; /* Adjust the spacing between the text and the dropdown */
+}
+
+#temples {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center the temple cards */
+    margin: 0 auto;
 }
 
 /* Class Selectors */
