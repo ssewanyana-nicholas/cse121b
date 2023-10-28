@@ -1,7 +1,4 @@
-// TMDb API key
-const tmdbApiKey = 'd7ef18f80dfcb38645a950e0b79ffb39';
-
-//  DOM elements
+// DOM elements
 const searchInput = document.getElementById('search-input');
 const searchButton = document.getElementById('search-button');
 const resultsContainer = document.getElementById('results-container');
@@ -16,18 +13,23 @@ searchButton.addEventListener('click', () => {
     detailsContainer.innerHTML = '';
 
     if (searchTerm) {
-        // Call the function to fetch movie data based on the search term
-        fetchMovieData(searchTerm);
+        // Fetching data from movies.json (simulated API call)
+        fetch('movies.json')
+            .then(response => response.json())
+            .then(data => {
+                // Find movies containing the search term in their title
+                const foundMovies = data.filter(movie => movie.title.toLowerCase().includes(searchTerm.toLowerCase()));
+                displaySearchResults(foundMovies);
+            })
+            .catch(error => console.error('Error fetching data:', error));
     }
 });
 
-// Function to fetch movie data from TMDb API
-async function fetchMovieData(searchTerm) {
-    const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${tmdbApiKey}&query=${searchTerm}`);
-    const data = await response.json();
+// Function to display search results
+function displaySearchResults(movies) {
+    resultsContainer.innerHTML = '';
 
-    // Display search results in the resultsContainer
-    data.results.forEach(movie => {
+    movies.forEach(movie => {
         const movieElement = createMovieCard(movie);
         resultsContainer.appendChild(movieElement);
     });
@@ -35,29 +37,40 @@ async function fetchMovieData(searchTerm) {
 
 // Function to create a movie card
 function createMovieCard(movie) {
+    const { title, year, thumbnail } = movie;
+
     const movieElement = document.createElement('div');
     movieElement.classList.add('movie-card');
     movieElement.innerHTML = `
-        <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.title}">
-        <h3>${movie.title}</h3>
-    `;
+    <img src="${thumbnail}" alt="${title}">
+    <h3>${title} (${year})</h3>
+  `;
+
     movieElement.addEventListener('click', () => {
-        const contentId = movie.id;
-        displayMovieDetails(contentId);
+        displayMovieDetails(movie);
     });
+
     return movieElement;
 }
 
 // Function to display movie details
-async function displayMovieDetails(contentId) {
-    const response = await fetch(`https://api.themoviedb.org/3/movie/${contentId}?api_key=${tmdbApiKey}`);
-    const details = await response.json();
+function displayMovieDetails(movie) {
+    const { title, year, cast, genres, thumbnail, thumbnail_width, thumbnail_height, extract } = movie;
 
-    // Display movie details in the detailsContainer
-    detailsContainer.innerHTML = `
-        <h2>${details.title}</h2>
-        <p>${details.overview}</p>
-        <p>Released: ${details.release_date}</p>
-        <p>Runtime: ${details.runtime} minutes</p>
+    const castList = cast.map(actor => `<li>${actor}</li>`).join('');
+    const genreList = genres.map(genre => `<li>${genre}</li>`).join('');
+
+    const movieDetailsHTML = `
+      <div class="movie-info">
+        <h2>${title} (${year})</h2>
+        <img src="${thumbnail}" alt="${title}" width="${thumbnail_width}" height="${thumbnail_height}">
+        <h3>Cast:</h3>
+        <ul>${castList}</ul>
+        <h3>Genres:</h3>
+        <ul>${genreList}</ul>
+        <p>${extract}</p>
+      </div>
     `;
+
+    detailsContainer.innerHTML = movieDetailsHTML;
 }

@@ -1,32 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Interactive Movie Finder</title>
-    <link rel="stylesheet" href="styles/main.css">
+  <meta charset="UTF-8">
+  <title>Movie Finder</title>
+  <link rel="stylesheet" href="styles/styles.css">
 </head>
+<h1 style="text-align: center; margin-top: 20px;">Interactive Movie Finder</h1>
+
 <body>
-    <header>
-        <h1>Interactive Movie Finder</h1>
-    </header>
-    <main>
-        <div id="search-container">
-            <input type="text" id="search-input" placeholder="Search for a movie">
-            <button id="search-button">Search</button>
-        </div>
-        <div id="results-container">
-            <!-- Movie search results will be displayed here -->
-        </div>
-        <div id="details-container">
-            <!-- Movie details and trailers will be displayed here -->
-        </div>
-    </main>
-    <footer>
-        <p>&copy; <span id="year"></span> Interactive Movie Finder</p>
-    </footer>
-    <script src="scripts/main.js" type="module"></script>
-    <script>
-        document.getElementById("year").innerHTML = new Date().getFullYear();
-    </script>
+  <div id="search-container">
+    <input type="text" id="search-input" placeholder="Search for a movie">
+    <button id="search-button">Search</button>
+  </div>
+
+  <div id="results-container">
+    <!-- Search results will be displayed here -->
+  </div>
+
+  <div id="details-container">
+    <!-- Movie details will be displayed here -->
+  </div>
+  <footer>
+    <p>&copy; <span id="year"></span> Interactive Movie Finder</p>
+  </footer>
+  <script src="project.js"></script>
+  <script>
+    document.getElementById("year").innerHTML = new Date().getFullYear();
+  </script>
 </body>
+
 </html>
